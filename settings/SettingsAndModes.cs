@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace VectorEditor
+namespace VectorEditor.settings
 {
     public static class SettingsAndModes
     {
