@@ -96,7 +96,7 @@ namespace VectorEditor
     {
         //Статичный список узлов с точками
         private static LinkedList<MyPoint> points = new LinkedList<MyPoint>();
-        private static List<Figure> figures = new List<Figure>();
+        private static List<GraphObject> figures = new List<GraphObject>();
         public static long IDS = 0;
 
         //Первая точка в списке
@@ -147,7 +147,7 @@ namespace VectorEditor
 
         //Получаем точку по ID
         //На вход подается id.
-        public static MyPoint? FindPbyID(int id)
+        public static MyPoint? FindPbyID(long id)
         {
             //Получаем самый первый узел, его индекс будет 0
             LinkedListNode<MyPoint> node = points.First;
@@ -225,6 +225,23 @@ namespace VectorEditor
         public static void ClearAll()
         {
             points.Clear();
+        }
+
+        //Добавление новой фигуры в список
+        public static void AddNewFigure(GraphObject figure)
+        {
+            figures.Add(figure);
+        }
+
+        //Удаление фигуры из списка
+        public static void RemoveFigure(GraphObject figure)
+        {
+            figures.Remove(figure);
+        }
+
+        public static List<GraphObject> GetAllFigures()
+        {
+            return figures;
         }
 
         //Вывести все точки как String строка.
