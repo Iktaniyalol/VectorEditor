@@ -19,7 +19,7 @@ namespace VectorEditor
             this.y = y;
             this.id = id;
         }
-        //setter getter
+        //геттер и сеттер переменной x
         public int X
         {
             get
@@ -31,7 +31,7 @@ namespace VectorEditor
                 x = value;
             }
         }
-        //setter getter
+        //геттер и сеттер переменной y
         public int Y
         {
             get
@@ -43,7 +43,7 @@ namespace VectorEditor
                 y = value;
             }
         }
-        //getter
+        //геттер и сеттер переменной id
         public long ID
         {
             get

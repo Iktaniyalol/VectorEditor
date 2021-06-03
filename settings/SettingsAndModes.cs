@@ -4,44 +4,29 @@ namespace VectorEditor.settings
 {
     public static class SettingsAndModes
     {
-        static bool LineMode;
-        static bool CircleMode;
-        static bool RectangleMode;
+        //Чтобы было проще, сделаем режим в виде Enum-ов
+        public enum EditorMode
+        {
+            Cursor,
+            Line,
+            Circle,
+            Rectangle
+        }
 
-        public static bool IsLineMode
+        static EditorMode mode = EditorMode.Cursor; //Текущий мод
+
+        //геттер и сеттер переменной mode
+        public static EditorMode Mode
         {
             get
             {
-                return LineMode;
+                return mode;
             }
             set
             {
-                LineMode = value;
+                mode = value;
             }
         }
 
-        public static bool IsCircleMode
-        {
-            get
-            {
-                return CircleMode;
-            }
-            set
-            {
-                CircleMode = value;
-            }
-        }
-
-        public static bool IsRectangleMode
-        {
-            get
-            {
-                return RectangleMode;
-            }
-            set
-            {
-                RectangleMode = value;
-            }
-        }
     }
 }

@@ -5,12 +5,12 @@ using System.Drawing;
 
 namespace VectorEditor.objects
 {
+    //Абстрактный класс фигуры.
     public abstract class Figure : GraphObject
     {
         protected Color color = Color.Black; //Цвет фигуры
 
-
-        //setter getter
+        //геттер и сеттер переменной color
         public Color Color
         {
             get

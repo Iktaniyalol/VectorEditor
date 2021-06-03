@@ -5,15 +5,17 @@ using System.Drawing;
 
 namespace VectorEditor.objects
 {
+    //Абстрактный класс графического объекта.
     public abstract class GraphObject
     {
-        protected int thickness = 1; //Толщина линии/обводки
+        protected float thickness = 0.5f; //Толщина линии/обводки
         protected Color thicknessColor = Color.Black; //Цвет обводки/линии
+        protected long[] PointsIndexes; //Массив, в котором будут храниться все точки графического объекта
 
         public abstract void Draw(Graphics g);
 
-        //setter getter
-        public int Thickness
+        //геттер и сеттер переменной thickness
+        public float Thickness
         {
             get
             {
@@ -26,7 +28,7 @@ namespace VectorEditor.objects
         }
 
 
-        //setter getter
+        //геттер и сеттер переменной thicknessColor
         public Color ThicknessColor
         {
             get
@@ -37,6 +39,11 @@ namespace VectorEditor.objects
             {
                 thicknessColor = value;
             }
+        }
+
+        public long[] GetPointsIndexes() // Получить ID всех точек в виде массива
+        {
+            return PointsIndexes;
         }
     }
 }
