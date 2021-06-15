@@ -66,9 +66,9 @@ namespace VectorEditor
                             MousePrevPoint = new Point(e.X, e.Y);
                             break;
                         }
-                    case SettingsAndModes.EditorMode.Polygon: //Построение любой фигуры
+                    case SettingsAndModes.EditorMode.Polygon: //Построение любого многоугольника
                         {
-                            PolygonPoints.Add(new Point(e.X, e.Y)); //Добавляем точку в массив точек для построения фигуры
+                            PolygonPoints.Add(new Point(e.X, e.Y)); //Добавляем точку в массив точек для построения многоугольника
                             pictureBox1.Invalidate(); //Очищаем PictureBox
                             break;
                         }
@@ -79,19 +79,20 @@ namespace VectorEditor
             {
                 switch (SettingsAndModes.Mode)
                 {
-                    case SettingsAndModes.EditorMode.Polygon: //Создание фигуры
+                    case SettingsAndModes.EditorMode.Polygon: //Создание многоугольника
                         {
+                            if (PolygonPoints.Count < 3) return; //Если у нас меньше 3 точек, это не многоугольник
                             if (PolygonPoints.Count == 3) //Если у нас 3 точки, то это треугольник
                             {
                                 VTriangle triangle = new VTriangle(thicknessBar.Value / 100f, thickness, fill, PolygonPoints.ToArray()); //Создаем экземпляр класса VTriangle, передаем точки
                                 Vector.AddNewFigure(triangle);
-                                PolygonPoints.Clear(); //Очищаем точки создания фигуры
+                                PolygonPoints.Clear(); //Очищаем точки создания многоугольника
                                 pictureBox1.Invalidate(); //Очищаем PictureBox
                             } else //многоугольник
                             {
                                 VPolygone polygone = new VPolygone(thicknessBar.Value / 100f, thickness, fill, PolygonPoints.ToArray()); //Создаем экземпляр класса VPolygone, передаем точки
                                 Vector.AddNewFigure(polygone);
-                                PolygonPoints.Clear(); //Очищаем точки создания фигуры
+                                PolygonPoints.Clear(); //Очищаем точки создания многоугольника
                                 pictureBox1.Invalidate(); //Очищаем PictureBox
                             }
                             break;
@@ -121,7 +122,7 @@ namespace VectorEditor
                     }
                 case SettingsAndModes.EditorMode.Polygon:
                     {
-                        if (PolygonPoints.Count != 0) //Если мы поставили уже хотя бы одну точку создаваемой фигуры
+                        if (PolygonPoints.Count != 0) //Если мы поставили уже хотя бы одну точку создаваемого многоугольника
                         {
                             pictureBox1.Invalidate(); //Очищаем PictureBox
 
@@ -182,7 +183,7 @@ namespace VectorEditor
         }
 
         //Данное событие вызывается, когда PictureBox перерисовывается.
-        // Т.е. когда мы вызываем Invalidate(), форма очищается и вызывается данное событие. Мы отрисовываем фигуру заново, тем самым мы сделали резиновые фигуры.
+        // Т.е. когда мы вызываем Invalidate(), форма очищается и вызывается данное событие. Мы отрисовываем объект заново, тем самым мы сделали "резиновые" объекты.
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
@@ -211,9 +212,9 @@ namespace VectorEditor
                         }
                 }
             }
-            if (SettingsAndModes.Mode == SettingsAndModes.EditorMode.Polygon) //Мод построения любой фигуры
+            if (SettingsAndModes.Mode == SettingsAndModes.EditorMode.Polygon) //Мод построения любого многоугольника
             {
-                if (PolygonPoints.Count == 0) return; //У нас еще не записаны точки для создания фигуры
+                if (PolygonPoints.Count == 0) return; //У нас еще не записаны точки для создания многоугольника
                 for (int i = 0; i < PolygonPoints.Count - 1; i++) //Перебираем все точки
                 {
                     g.DrawLine(new Pen(SettingsAndModes.SelectedThicknessColor, thicknessBar.Value / 100f), PolygonPoints[i], PolygonPoints[i + 1]);
@@ -237,11 +238,11 @@ namespace VectorEditor
                 fill = MyDialog.Color;
                 colorButton1.BackColor = fill;
                 colorButton1.Image = null; //Убираем рисунок, означающий что цвет не выбран
-                if (SelectedFigures.Count != 0) //Если у нас выбраны фигуры
+                if (SelectedFigures.Count != 0) //Если у нас выбраны объекты
                 {
                     foreach (Figure figure in SelectedFigures)
                     {
-                        figure.Color = fill; //Меняем цвет заливки у выбранных фигур
+                        figure.Color = fill; //Меняем цвет заливки у выбранных объектов
                     }
                     pictureBox1.Invalidate(); //Очищаем PictureBox
                 }
@@ -261,11 +262,11 @@ namespace VectorEditor
                 thickness = MyDialog.Color;
                 colorButton2.BackColor = thickness; //Назначаем цвет
                 colorButton2.Image = null; //Убираем рисунок, означающий что цвет не выбран
-                if (SelectedFigures.Count != 0) //Если у нас выбраны фигуры
+                if (SelectedFigures.Count != 0) //Если у нас выбраны объекты
                 {
                     foreach (Figure figure in SelectedFigures)
                     {
-                        figure.Color = thickness; //Меняем цвет контура у выбранных фигур
+                        figure.Color = thickness; //Меняем цвет контура у выбранных объектов
                     }
                     pictureBox1.Invalidate(); //Очищаем PictureBox
                 }
@@ -277,7 +278,7 @@ namespace VectorEditor
             SettingsAndModes.Mode = SettingsAndModes.EditorMode.Cursor; //Включаем Курсор мод
             thicknessBar.Visible = false; //Выключаем отображение толщины
             labelThickness.Visible = false;
-            PolygonPoints.Clear(); //Очищаем точки создания фигуры
+            PolygonPoints.Clear(); //Очищаем точки создания многоугольника
             pictureBox1.Invalidate(); //Очищаем PictureBox
         }
 
@@ -288,7 +289,7 @@ namespace VectorEditor
             labelThickness.Text = "Толщина: " + thicknessBar.Value / 100f + "px"; //Отображаем выбранную толщину,
                                                                            //обязательно делим на 100, т.к. в TrackBar могут храниться только целые числа
             thicknessBar.Visible = true; //Включаем отображение толщины
-            PolygonPoints.Clear(); //Очищаем точки создания фигуры
+            PolygonPoints.Clear(); //Очищаем точки создания многоугольника
             pictureBox1.Invalidate(); //Очищаем PictureBox
         }
 
@@ -299,7 +300,7 @@ namespace VectorEditor
             labelThickness.Text = "Толщина обводки: " + thicknessBar.Value / 100f + "px"; //Отображаем выбранную толщину,
                                                                                    //обязательно делим на 100, т.к. в TrackBar могут храниться только целые числа
             thicknessBar.Visible = true; //Включаем отображение толщины
-            PolygonPoints.Clear(); //Очищаем точки создания фигуры
+            PolygonPoints.Clear(); //Очищаем точки создания многоугольника
             pictureBox1.Invalidate(); //Очищаем PictureBox
         }
 
@@ -310,18 +311,18 @@ namespace VectorEditor
             labelThickness.Text = "Толщина обводки: " + thicknessBar.Value / 100f + "px"; //Отображаем выбранную толщину,
                                                                                    //обязательно делим на 100, т.к. в TrackBar могут храниться только целые числа
             thicknessBar.Visible = true; //Включаем отображение толщины
-            PolygonPoints.Clear(); //Очищаем точки создания фигуры
+            PolygonPoints.Clear(); //Очищаем точки создания многоугольника
             pictureBox1.Invalidate(); //Очищаем PictureBox
         }
 
         private void buttonPolygon_Click(object sender, EventArgs e)
         {
-            SettingsAndModes.Mode = SettingsAndModes.EditorMode.Polygon; //Включаем мод построения фигуры
+            SettingsAndModes.Mode = SettingsAndModes.EditorMode.Polygon; //Включаем мод построения многоугольника
             labelThickness.Visible = true;
             labelThickness.Text = "Толщина обводки: " + thicknessBar.Value / 100f + "px"; //Отображаем выбранную толщину,
                                                                                           //обязательно делим на 100, т.к. в TrackBar могут храниться только целые числа
             thicknessBar.Visible = true; //Включаем отображение толщины
-            PolygonPoints.Clear(); //Очищаем точки создания фигуры
+            PolygonPoints.Clear(); //Очищаем точки создания многоугольника
             pictureBox1.Invalidate(); //Очищаем PictureBox
         }
 
@@ -364,11 +365,11 @@ namespace VectorEditor
                 colorButton1.BackColor = Color.White;
                 colorButton1.Image = Properties.Resources.resource__9_;
                 fill = Color.Empty;
-                if (SelectedFigures.Count != 0) //Если у нас выбраны фигуры
+                if (SelectedFigures.Count != 0) //Если у нас выбраны объекты
                 {
                     foreach (Figure figure in SelectedFigures)
                     {
-                        figure.Color = fill; //Меняем цвет заливки у выбранных фигур
+                        figure.Color = fill; //Меняем цвет заливки у выбранных объектов
                     }
                     pictureBox1.Invalidate(); //Очищаем PictureBox
                 }
@@ -383,11 +384,11 @@ namespace VectorEditor
                 colorButton2.Image = Properties.Resources.resource__9_;
                 thickness = Color.Empty;
 
-                if (SelectedFigures.Count != 0) //Если у нас выбраны фигуры
+                if (SelectedFigures.Count != 0) //Если у нас выбраны объекты
                 {
                     foreach (Figure figure in SelectedFigures)
                     {
-                        figure.Color = thickness; //Меняем цвет контура у выбранных фигур
+                        figure.Color = thickness; //Меняем цвет контура у выбранных объектов
                     }
                     pictureBox1.Invalidate(); //Очищаем PictureBox
                 }
