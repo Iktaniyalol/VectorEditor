@@ -29,7 +29,6 @@ namespace VectorEditor
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.buttonCursor = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -51,9 +50,10 @@ namespace VectorEditor
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.SystemColors.Window;
-            this.pictureBox1.Location = new System.Drawing.Point(3, 85);
+            this.pictureBox1.Location = new System.Drawing.Point(3, 64);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1057, 828);
+            this.pictureBox1.Size = new System.Drawing.Size(925, 565);
             this.pictureBox1.TabIndex = 7;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
@@ -68,10 +68,11 @@ namespace VectorEditor
             this.buttonCursor.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonCursor.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.buttonCursor.ForeColor = System.Drawing.Color.Brown;
-            this.buttonCursor.Image = ((System.Drawing.Image)(resources.GetObject("buttonCursor.Image")));
-            this.buttonCursor.Location = new System.Drawing.Point(10, 15);
+            this.buttonCursor.Image = global::VectorEditor.Properties.Resources.resource__7_;
+            this.buttonCursor.Location = new System.Drawing.Point(5, 3);
+            this.buttonCursor.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonCursor.Name = "buttonCursor";
-            this.buttonCursor.Size = new System.Drawing.Size(51, 41);
+            this.buttonCursor.Size = new System.Drawing.Size(45, 42);
             this.buttonCursor.TabIndex = 8;
             this.buttonCursor.Tag = "Курсор";
             this.buttonCursor.UseVisualStyleBackColor = false;
@@ -92,30 +93,32 @@ namespace VectorEditor
             this.panel1.Controls.Add(this.buttonRectangle);
             this.panel1.Controls.Add(this.buttonLine);
             this.panel1.Controls.Add(this.buttonCursor);
-            this.panel1.Location = new System.Drawing.Point(12, 12);
+            this.panel1.Location = new System.Drawing.Point(10, 9);
+            this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1040, 67);
+            this.panel1.Size = new System.Drawing.Size(910, 51);
             this.panel1.TabIndex = 9;
             // 
             // labelThickness
             // 
-            this.labelThickness.AutoSize = true;
-            this.labelThickness.Location = new System.Drawing.Point(656, 38);
+            this.labelThickness.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelThickness.Location = new System.Drawing.Point(715, 3);
             this.labelThickness.Name = "labelThickness";
-            this.labelThickness.Size = new System.Drawing.Size(79, 20);
+            this.labelThickness.Size = new System.Drawing.Size(184, 41);
             this.labelThickness.TabIndex = 17;
-            this.labelThickness.Text = "Толщина: ";
+            this.labelThickness.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.labelThickness.Visible = false;
             // 
             // thicknessBar
             // 
             this.thicknessBar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.thicknessBar.LargeChange = 500;
-            this.thicknessBar.Location = new System.Drawing.Point(544, 3);
+            this.thicknessBar.Location = new System.Drawing.Point(456, 3);
+            this.thicknessBar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.thicknessBar.Maximum = 1000;
             this.thicknessBar.Minimum = 50;
             this.thicknessBar.Name = "thicknessBar";
-            this.thicknessBar.Size = new System.Drawing.Size(290, 56);
+            this.thicknessBar.Size = new System.Drawing.Size(254, 45);
             this.thicknessBar.SmallChange = 100;
             this.thicknessBar.TabIndex = 16;
             this.thicknessBar.TickFrequency = 100;
@@ -125,23 +128,27 @@ namespace VectorEditor
             // 
             // colorButton2
             // 
-            this.colorButton2.BackColor = System.Drawing.Color.Black;
-            this.colorButton2.Location = new System.Drawing.Point(475, 19);
+            this.colorButton2.BackColor = System.Drawing.Color.White;
+            this.colorButton2.Location = new System.Drawing.Point(416, 11);
+            this.colorButton2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.colorButton2.Name = "colorButton2";
-            this.colorButton2.Size = new System.Drawing.Size(40, 41);
+            this.colorButton2.Size = new System.Drawing.Size(35, 35);
             this.colorButton2.TabIndex = 15;
             this.colorButton2.UseVisualStyleBackColor = false;
             this.colorButton2.Click += new System.EventHandler(this.colorButton2_Click);
+            this.colorButton2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.colorButton2_MouseDown);
             // 
             // colorButton1
             // 
             this.colorButton1.BackColor = System.Drawing.Color.White;
-            this.colorButton1.Location = new System.Drawing.Point(455, 7);
+            this.colorButton1.Location = new System.Drawing.Point(397, 5);
+            this.colorButton1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.colorButton1.Name = "colorButton1";
-            this.colorButton1.Size = new System.Drawing.Size(40, 41);
+            this.colorButton1.Size = new System.Drawing.Size(35, 35);
             this.colorButton1.TabIndex = 14;
             this.colorButton1.UseVisualStyleBackColor = false;
             this.colorButton1.Click += new System.EventHandler(this.colorButton1_Click);
+            this.colorButton1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.colorButton1_MouseDown);
             // 
             // buttonRotate
             // 
@@ -150,10 +157,11 @@ namespace VectorEditor
             this.buttonRotate.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonRotate.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.buttonRotate.ForeColor = System.Drawing.Color.Brown;
-            this.buttonRotate.Image = ((System.Drawing.Image)(resources.GetObject("buttonRotate.Image")));
-            this.buttonRotate.Location = new System.Drawing.Point(381, 15);
+            this.buttonRotate.Image = global::VectorEditor.Properties.Resources.resource__5_;
+            this.buttonRotate.Location = new System.Drawing.Point(329, 3);
+            this.buttonRotate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonRotate.Name = "buttonRotate";
-            this.buttonRotate.Size = new System.Drawing.Size(54, 41);
+            this.buttonRotate.Size = new System.Drawing.Size(47, 42);
             this.buttonRotate.TabIndex = 13;
             this.buttonRotate.Tag = "Курсор";
             this.buttonRotate.UseVisualStyleBackColor = false;
@@ -165,10 +173,11 @@ namespace VectorEditor
             this.buttonMirror.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonMirror.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.buttonMirror.ForeColor = System.Drawing.Color.Brown;
-            this.buttonMirror.Image = ((System.Drawing.Image)(resources.GetObject("buttonMirror.Image")));
-            this.buttonMirror.Location = new System.Drawing.Point(320, 15);
+            this.buttonMirror.Image = global::VectorEditor.Properties.Resources.resource__4_;
+            this.buttonMirror.Location = new System.Drawing.Point(276, 3);
+            this.buttonMirror.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonMirror.Name = "buttonMirror";
-            this.buttonMirror.Size = new System.Drawing.Size(50, 41);
+            this.buttonMirror.Size = new System.Drawing.Size(44, 42);
             this.buttonMirror.TabIndex = 11;
             this.buttonMirror.Tag = "Курсор";
             this.buttonMirror.UseVisualStyleBackColor = false;
@@ -180,13 +189,15 @@ namespace VectorEditor
             this.buttonPolygon.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonPolygon.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.buttonPolygon.ForeColor = System.Drawing.Color.Brown;
-            this.buttonPolygon.Image = ((System.Drawing.Image)(resources.GetObject("buttonPolygon.Image")));
-            this.buttonPolygon.Location = new System.Drawing.Point(253, 15);
+            this.buttonPolygon.Image = global::VectorEditor.Properties.Resources.resource__2_;
+            this.buttonPolygon.Location = new System.Drawing.Point(217, 3);
+            this.buttonPolygon.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonPolygon.Name = "buttonPolygon";
-            this.buttonPolygon.Size = new System.Drawing.Size(55, 41);
+            this.buttonPolygon.Size = new System.Drawing.Size(48, 42);
             this.buttonPolygon.TabIndex = 12;
             this.buttonPolygon.Tag = "Курсор";
             this.buttonPolygon.UseVisualStyleBackColor = false;
+            this.buttonPolygon.Click += new System.EventHandler(this.buttonPolygon_Click);
             // 
             // buttonCircle
             // 
@@ -195,10 +206,11 @@ namespace VectorEditor
             this.buttonCircle.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonCircle.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.buttonCircle.ForeColor = System.Drawing.Color.Brown;
-            this.buttonCircle.Image = ((System.Drawing.Image)(resources.GetObject("buttonCircle.Image")));
-            this.buttonCircle.Location = new System.Drawing.Point(192, 15);
+            this.buttonCircle.Image = global::VectorEditor.Properties.Resources.resource__1_;
+            this.buttonCircle.Location = new System.Drawing.Point(164, 3);
+            this.buttonCircle.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonCircle.Name = "buttonCircle";
-            this.buttonCircle.Size = new System.Drawing.Size(50, 41);
+            this.buttonCircle.Size = new System.Drawing.Size(44, 42);
             this.buttonCircle.TabIndex = 11;
             this.buttonCircle.Tag = "Курсор";
             this.buttonCircle.UseVisualStyleBackColor = false;
@@ -211,10 +223,11 @@ namespace VectorEditor
             this.buttonRectangle.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonRectangle.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.buttonRectangle.ForeColor = System.Drawing.Color.Brown;
-            this.buttonRectangle.Image = ((System.Drawing.Image)(resources.GetObject("buttonRectangle.Image")));
-            this.buttonRectangle.Location = new System.Drawing.Point(131, 15);
+            this.buttonRectangle.Image = global::VectorEditor.Properties.Resources.resource__8_;
+            this.buttonRectangle.Location = new System.Drawing.Point(111, 3);
+            this.buttonRectangle.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonRectangle.Name = "buttonRectangle";
-            this.buttonRectangle.Size = new System.Drawing.Size(49, 41);
+            this.buttonRectangle.Size = new System.Drawing.Size(43, 42);
             this.buttonRectangle.TabIndex = 10;
             this.buttonRectangle.Tag = "Курсор";
             this.buttonRectangle.UseVisualStyleBackColor = false;
@@ -227,10 +240,11 @@ namespace VectorEditor
             this.buttonLine.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonLine.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.buttonLine.ForeColor = System.Drawing.Color.Brown;
-            this.buttonLine.Image = ((System.Drawing.Image)(resources.GetObject("buttonLine.Image")));
-            this.buttonLine.Location = new System.Drawing.Point(72, 15);
+            this.buttonLine.Image = global::VectorEditor.Properties.Resources.resource__3_;
+            this.buttonLine.Location = new System.Drawing.Point(59, 3);
+            this.buttonLine.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonLine.Name = "buttonLine";
-            this.buttonLine.Size = new System.Drawing.Size(48, 41);
+            this.buttonLine.Size = new System.Drawing.Size(42, 42);
             this.buttonLine.TabIndex = 9;
             this.buttonLine.Tag = "Курсор";
             this.buttonLine.UseVisualStyleBackColor = false;
@@ -238,12 +252,13 @@ namespace VectorEditor
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.ClientSize = new System.Drawing.Size(1064, 845);
+            this.ClientSize = new System.Drawing.Size(931, 634);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pictureBox1);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form1";
             this.Text = "VectorEditor";
             this.Load += new System.EventHandler(this.Form1_Load);

@@ -8,7 +8,7 @@ namespace VectorEditor.objects
     //Абстрактный класс фигуры.
     public abstract class Figure : GraphObject
     {
-        protected Color color = Color.Black; //Цвет фигуры
+        protected Color color = Color.Empty; //Цвет фигуры
 
         //геттер и сеттер переменной color
         public Color Color

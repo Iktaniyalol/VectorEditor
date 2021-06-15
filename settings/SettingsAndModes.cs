@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 
 namespace VectorEditor.settings
 {
@@ -10,10 +11,12 @@ namespace VectorEditor.settings
             Cursor,
             Line,
             Circle,
-            Rectangle
+            Rectangle,
+            Polygon
         }
 
         static EditorMode mode = EditorMode.Cursor; //Текущий мод
+        static Color selectedThicknessColor = Color.BlueViolet; //Цвет обводки выделенной фигуры/линии
 
         //геттер и сеттер переменной mode
         public static EditorMode Mode
@@ -28,5 +31,17 @@ namespace VectorEditor.settings
             }
         }
 
+        //геттер и сеттер переменной selectThicknessColor
+        public static Color SelectedThicknessColor
+        {
+            get
+            {
+                return selectedThicknessColor;
+            }
+            set
+            {
+                selectedThicknessColor = value;
+            }
+        }
     }
 }
