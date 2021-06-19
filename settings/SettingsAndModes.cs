@@ -15,33 +15,21 @@ namespace VectorEditor.settings
             Polygon
         }
 
-        static EditorMode mode = EditorMode.Cursor; //Текущий мод
-        static Color selectedThicknessColor = Color.BlueViolet; //Цвет обводки выделенной фигуры/линии
-
-        //геттер и сеттер переменной mode
-        public static EditorMode Mode
+        //Режим курсора в виде Enum
+        public enum CursorMode
         {
-            get
-            {
-                return mode;
-            }
-            set
-            {
-                mode = value;
-            }
+            Select,
+            MovePoint,
+            MoveFigure,
+            Transform
         }
 
-        //геттер и сеттер переменной selectThicknessColor
-        public static Color SelectedThicknessColor
-        {
-            get
-            {
-                return selectedThicknessColor;
-            }
-            set
-            {
-                selectedThicknessColor = value;
-            }
-        }
+
+        public static EditorMode Mode = EditorMode.Cursor; //Текущий мод
+        public static CursorMode CMode = CursorMode.Select; //Мод курсора
+        public static Color EditLineColor = Color.BlueViolet; //Цвет обводки выделенной фигуры/линии
+        public static Color EditPointColor = Color.Red; //Цвет точки для выделения
+        public static Color CenterPointColor = Color.Magenta; //Цвет центральной точки любого объекта
+        public const int Eps = 5; //Радиус, в котором мы будем искать, на какую точку нажал пользователь
     }
 }

@@ -1,0 +1,2 @@
+https://github.com/Iktaniyalol/VectorEditor/releases/tag/v0.2
+Третья версия проекта. Почитать изменения можно по ссылочке выше.

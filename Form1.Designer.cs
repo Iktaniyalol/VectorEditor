@@ -29,7 +29,13 @@ namespace VectorEditor
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.PasteMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.Paste = new System.Windows.Forms.ToolStripMenuItem();
+            this.CopyDeleteMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.Copy = new System.Windows.Forms.ToolStripMenuItem();
+            this.Delete = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonCursor = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.labelThickness = new System.Windows.Forms.Label();
@@ -43,15 +49,23 @@ namespace VectorEditor
             this.buttonRectangle = new System.Windows.Forms.Button();
             this.buttonLine = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.PasteMenu.SuspendLayout();
+            this.CopyDeleteMenu.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.thicknessBar)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
             // 
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.BackColor = System.Drawing.SystemColors.Window;
-            this.pictureBox1.Location = new System.Drawing.Point(3, 64);
+            this.pictureBox1.ContextMenuStrip = this.PasteMenu;
+            this.pictureBox1.Location = new System.Drawing.Point(3, 65);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pictureBox1.MaximumSize = new System.Drawing.Size(2557, 1436);
+            this.pictureBox1.MinimumSize = new System.Drawing.Size(925, 565);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(925, 565);
             this.pictureBox1.TabIndex = 7;
@@ -60,6 +74,45 @@ namespace VectorEditor
             this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
             this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
             this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
+            // 
+            // PasteMenu
+            // 
+            this.PasteMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.Paste});
+            this.PasteMenu.Name = "contextMenuStrip2";
+            this.PasteMenu.Size = new System.Drawing.Size(164, 26);
+            // 
+            // Paste
+            // 
+            this.Paste.Name = "Paste";
+            this.Paste.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
+            this.Paste.Size = new System.Drawing.Size(163, 22);
+            this.Paste.Text = "Вставить";
+            this.Paste.Click += new System.EventHandler(this.Paste_Click);
+            // 
+            // CopyDeleteMenu
+            // 
+            this.CopyDeleteMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.Copy,
+            this.Delete});
+            this.CopyDeleteMenu.Name = "contextMenuStrip1";
+            this.CopyDeleteMenu.Size = new System.Drawing.Size(182, 48);
+            // 
+            // Copy
+            // 
+            this.Copy.Name = "Copy";
+            this.Copy.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
+            this.Copy.Size = new System.Drawing.Size(181, 22);
+            this.Copy.Text = "Копировать";
+            this.Copy.Click += new System.EventHandler(this.Copy_Click);
+            // 
+            // Delete
+            // 
+            this.Delete.Name = "Delete";
+            this.Delete.ShortcutKeys = System.Windows.Forms.Keys.Delete;
+            this.Delete.Size = new System.Drawing.Size(181, 22);
+            this.Delete.Text = "Удалить";
+            this.Delete.Click += new System.EventHandler(this.Delete_Click);
             // 
             // buttonCursor
             // 
@@ -93,10 +146,12 @@ namespace VectorEditor
             this.panel1.Controls.Add(this.buttonRectangle);
             this.panel1.Controls.Add(this.buttonLine);
             this.panel1.Controls.Add(this.buttonCursor);
-            this.panel1.Location = new System.Drawing.Point(10, 9);
+            this.panel1.Location = new System.Drawing.Point(9, 9);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panel1.MaximumSize = new System.Drawing.Size(2553, 52);
+            this.panel1.MinimumSize = new System.Drawing.Size(910, 52);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(910, 51);
+            this.panel1.Size = new System.Drawing.Size(910, 52);
             this.panel1.TabIndex = 9;
             // 
             // labelThickness
@@ -116,19 +171,19 @@ namespace VectorEditor
             this.thicknessBar.Location = new System.Drawing.Point(456, 3);
             this.thicknessBar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.thicknessBar.Maximum = 1000;
-            this.thicknessBar.Minimum = 50;
+            this.thicknessBar.Minimum = 100;
             this.thicknessBar.Name = "thicknessBar";
             this.thicknessBar.Size = new System.Drawing.Size(254, 45);
             this.thicknessBar.SmallChange = 100;
             this.thicknessBar.TabIndex = 16;
             this.thicknessBar.TickFrequency = 100;
-            this.thicknessBar.Value = 50;
+            this.thicknessBar.Value = 100;
             this.thicknessBar.Visible = false;
             this.thicknessBar.Scroll += new System.EventHandler(this.thicknessBar_Scroll);
             // 
             // colorButton2
             // 
-            this.colorButton2.BackColor = System.Drawing.Color.White;
+            this.colorButton2.BackColor = System.Drawing.Color.Black;
             this.colorButton2.Location = new System.Drawing.Point(416, 11);
             this.colorButton2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.colorButton2.Name = "colorButton2";
@@ -141,6 +196,7 @@ namespace VectorEditor
             // colorButton1
             // 
             this.colorButton1.BackColor = System.Drawing.Color.White;
+            this.colorButton1.Image = global::VectorEditor.Properties.Resources.resource__9_;
             this.colorButton1.Location = new System.Drawing.Point(397, 5);
             this.colorButton1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.colorButton1.Name = "colorButton1";
@@ -258,11 +314,15 @@ namespace VectorEditor
             this.ClientSize = new System.Drawing.Size(931, 634);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pictureBox1);
+            this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form1";
             this.Text = "VectorEditor";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.PasteMenu.ResumeLayout(false);
+            this.CopyDeleteMenu.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.thicknessBar)).EndInit();
@@ -284,6 +344,11 @@ namespace VectorEditor
         private System.Windows.Forms.Button colorButton2;
         private System.Windows.Forms.TrackBar thicknessBar;
         private System.Windows.Forms.Label labelThickness;
+        private System.Windows.Forms.ContextMenuStrip CopyDeleteMenu;
+        private System.Windows.Forms.ToolStripMenuItem Copy;
+        private System.Windows.Forms.ToolStripMenuItem Delete;
+        private System.Windows.Forms.ContextMenuStrip PasteMenu;
+        private System.Windows.Forms.ToolStripMenuItem Paste;
     }
 }
 

@@ -10,14 +10,16 @@ namespace VectorEditor
     {
         private int x; //координата x
         private int y; //координата y
-        private long id; //Айди данной точки, статичен
+        private int id; //Айди данной точки, статичен
+        private GraphObject vobject; //Ссылка на векторный объект, которому принадлежит данная точка
 
         //Конструктор создания
-        public MyPoint(int x, int y, long id)
+        public MyPoint(int x, int y, int id, GraphObject vobject)
         {
             this.x = x;
             this.y = y;
             this.id = id;
+            this.vobject = vobject;
         }
         //геттер и сеттер переменной x
         public int X
@@ -43,12 +45,21 @@ namespace VectorEditor
                 y = value;
             }
         }
-        //геттер и сеттер переменной id
-        public long ID
+        //геттер переменной id
+        public int ID
         {
             get
             {
                 return id;
+            }
+        }
+
+        //геттер переменной vobject
+        public GraphObject VObject
+        {
+            get
+            {
+                return vobject;
             }
         }
 
@@ -61,7 +72,7 @@ namespace VectorEditor
         //оператор равно
         public static bool operator ==(MyPoint left, MyPoint right)
         {
-            return left.X == right.X && left.Y == right.Y && left.ID == right.ID;
+            return left.X == right.X && left.Y == right.Y && left.ID == right.ID && left.vobject == right.vobject;
         }
 
         //эквивалентность
@@ -69,7 +80,7 @@ namespace VectorEditor
         {
             if (!(obj is MyPoint)) return false;
             MyPoint comp = (MyPoint)obj;
-            return comp.X == this.X && comp.Y == this.Y && comp.ID == this.ID;
+            return comp.X == this.X && comp.Y == this.Y && comp.ID == this.ID && comp.vobject == this.vobject;
         }
 
         //Конвертация в Point структуру, встроенную в C#
@@ -78,16 +89,16 @@ namespace VectorEditor
             return new Point(X, Y);
         }
 
-        //HashCode структуры
+        //HashCode структуры, грубо говоря, уникальный код созданного объекта
         public override int GetHashCode()
         {
-            return x ^ y;
+            return x ^ y ^ ID; //Делаем исключающее или между x,y и ID
         }
 
         //Конвертация структуры в String, для вывода в консоль
         public override string ToString()
         {
-            return "{X=" + X.ToString() + ",Y=" + Y.ToString() + ",ID=" + ID.ToString() + "}";
+            return "{X=" + X.ToString() + ",Y=" + Y.ToString() + ",ID=" + ID.ToString() + ", VObject=" + VObject.ToString() + "}";
         }
     }
 
@@ -95,37 +106,36 @@ namespace VectorEditor
     public static class Vector
     {
         //Статичный список узлов с точками
-        private static LinkedList<MyPoint> points = new LinkedList<MyPoint>();
+        private static List<MyPoint> points = new List<MyPoint>();
         private static List<GraphObject> figures = new List<GraphObject>();
-        public static long IDS = 0;
+        public static int IDS = 0;
 
         //Первая точка в списке
         public static MyPoint? GetFirstP()
         {
             //Переменная, хранящая первый узел
-            if (points.First == null) return null; //Если у нас нет первого узла, то и нет значения, возвращаем null
-            return points.First.Value; //В узле получаем значение
+            if (points.Count == 0) return null; //Если у нас пустой список, возвращаем null
+            return points[0]; //Возвращаем значение
         }
 
         //Последняя точка в списке
         public static MyPoint? GetLastP()
         {
             //Переменная, хранящая последний узел.
-            if (points.Last == null) return null; //Если у нас нет последнего узла, то и нет значения, возвращаем null
-            return points.Last.Value; //В узле получаем значение
+            if (points.Count == 0) return null; //Если у нас пустой список, возвращаем null
+            return points[points.Count - 1]; //Возвращаем значение
         }
 
         //Следующая точка после данной.
         //На вход подается точка.
         public static MyPoint? GetNextP(MyPoint? p)
         {
-            if (p != null)
+            if (p.HasValue) //Проверяем, есть ли точка
             {
-                LinkedListNode<MyPoint> point = points.Find(p.Value);
-                if (point == null) return null; //Если у нас нет такого узла в списке, то и следующего после него нет, возвращаем null
-                if (point.Next == null) return null; //Если нет следующего узла, то и нет его значения, возвращаем null
-                 //Ищем в списке нужный узел с нашей точкой, затем получаем следующий узел и его значение.
-                return point.Next.Value;
+                int index = points.IndexOf(p.Value);
+                if (index == -1) return null; //Если индекс -1, то такой точки в списке нет. Возвращаем null
+                if (index + 1 > points.Count - 1) return null; //Следующей точки нет
+                return points[index + 1];
             }
             return null;
         }
@@ -134,78 +144,45 @@ namespace VectorEditor
         //На вход подается точка.
         public static MyPoint? GetPrevP(MyPoint? p)
         {
-            if (p != null)
+            if (p.HasValue) //Проверяем, есть ли точка
             {
-                LinkedListNode<MyPoint> point = points.Find(p.Value);
-                if (point == null) return null; //Если у нас нет такого узла в списке, то и предыдущего после него нет, возвращаем null
-                if (point.Previous == null) return null; //Если нет предыдущего узла, то и нет его значения, возвращаем null
-                //Ищем в списке нужный узел с нашей точкой, затем получаем предыдущий узел и его значение.
-                return point.Previous.Value;
+                int index = points.IndexOf(p.Value);
+                if (index == -1) return null; //Если индекс -1, то такой точки в списке нет. Возвращаем null
+                if (index - 1 < 0) return null; //Предыдущей точки нет
+                return points[index - 1];
             }
             return null;
         }
 
         //Получаем точку по ID
         //На вход подается id.
-        public static MyPoint? FindPbyID(long id)
+        //Используется алгоритм двоичного поиска
+        public static MyPoint? FindPbyID(int id)
         {
-            //Получаем самый первый узел, его индекс будет 0
-            LinkedListNode<MyPoint> node = points.First;
-            for (int i = 0; i <= points.Count; i++)
+            int p = 0, q = points.Count - 1, CenterIndex = points.Count / 2; //Края проверки
+            MyPoint center = points[CenterIndex]; //Делим длину списка пополам
+            if (center.ID == id) return center; //проверяем на соответствие
+            if (center.ID > id) q = CenterIndex - 1; // Если айди больше чем искомый, сдвигаем правый край проверки
+            else p = CenterIndex + 1; //иначе сдвигаем левый край проверки
+            while (p <= q) //пока левый край меньше или равен правому
             {
-                if (node == null) return null; //Если узел null, возвращаем null, список пустой
-                if (node.Value == null) return null; //Если значение в узле null, возвращаем null
-                if (node.Value.ID == id) return node.Value;
-                node = node.Next;
+                CenterIndex = (p + q) / 2; //меняем центр
+                center = points[CenterIndex]; //берем новый центр
+                if (center.ID == id) return center; //проверяем на соответствие
+                if (center.ID > id) q = CenterIndex - 1; // Если айди больше чем искомый, сдвигаем правый край проверки
+                else p = CenterIndex + 1; //иначе сдвигаем левый край проверки
             }
             return null;
-        }
-
-        //Вставляем точку перед точкой
-        //На вход подается точка, новая точка.
-        public static void InsertPBeforeP(MyPoint? point, MyPoint? newpoint)
-        {
-            if (point != null && newpoint != null)
-            {
-                LinkedListNode<MyPoint> node = points.Find(point.Value);
-                if (node == null) return; //Если у нас нет такого узла в списке, останавливаем выполнение функции.
-                //Находим узел в списке по точке, добавляем после него новую точку.
-                points.AddBefore(node, newpoint.Value);
-            }
-        }
-
-        //Вставляем точку после точки
-        //На вход подается точка, новая точка.
-        public static void InsertPAfterP(MyPoint? point, MyPoint? newpoint)
-        {
-            if (point != null && newpoint != null)
-            {
-                LinkedListNode<MyPoint> node = points.Find(point.Value);
-                if (node == null) return; //Если у нас нет такого узла в списке, останавливаем выполнение функции.
-                //Находим узел в списке по точке, добавляем перед ним новую точку.
-                points.AddAfter(node, newpoint.Value);
-            }
-        }
-
-        //Добавляем точку в самое начало
-        //На вход подается точка.
-        public static void AddPToBegin(MyPoint? point)
-        {
-            if (point != null)
-            {
-                //Вставляем точку в самое начало
-                points.AddFirst(point.Value);
-            }
         }
 
         //Добавляем точку в конец
         //На вход подается точка.
         public static void AddP(MyPoint? point)
         {
-            if (point != null)
+            if (point.HasValue) //Проверяем, есть ли точка
             {
                 //Вставляем точку в самый конец
-                points.AddLast(point.Value);
+                points.Add(point.Value);
             }
         }
 
@@ -213,11 +190,25 @@ namespace VectorEditor
         //На вход подается точка.
         public static void RemoveP(MyPoint? point)
         {
-            if (point != null)
+            if (point.HasValue) //Проверяем, есть ли точка
             {
-                LinkedListNode<MyPoint> node = points.Find(point.Value);
-                if (node == null) return; //Если у нас нет такого узла в списке, останавливаем выполнение функции.
-                points.Remove(point.Value);
+                if (!points.Contains(point.Value)) return; //Если такой точки нет в списке, удалять нечего
+                points.Remove(point.Value); //Удаляем
+            }
+        }
+
+        //Изменить координаты уже существующей точки
+        //На вход подается новый x, y, сама точка
+        public static void SetCoordsP(int x, int y, MyPoint? point)
+        {
+            if (point.HasValue) //Проверяем, есть ли точка
+            {
+                if (!points.Contains(point.Value)) return; //Если такой точки нет в списке, мы не можем поменять ей координаты
+                MyPoint p = point.Value;
+                int index = points.IndexOf(p); //Получаем индекс точки
+                p.X = x; //Приравниваем x
+                p.Y = y; //Приравниваем y
+                points[index] = p; //Т.к. структуры при приравнивании делают полное копирование и не имеют ссылок, нам нужно назначить на этот индекс переменную с новыми точками
             }
         }
 
@@ -225,6 +216,15 @@ namespace VectorEditor
         public static void ClearAll()
         {
             points.Clear();
+        }
+
+        //геттер списка точек
+        public static List<MyPoint> VPoints
+        {
+            get
+            {
+                return points;
+            }
         }
 
         //Добавление новой фигуры в список
@@ -250,7 +250,7 @@ namespace VectorEditor
         {
             String str = "";
             foreach (MyPoint point in points) {
-                str = str + "{X=" + point.X.ToString() + ",Y=" + point.Y.ToString() + ",ID=" + point.ID.ToString() + "}";
+                str = str + "{X=" + point.X.ToString() + ",Y=" + point.Y.ToString() + ",ID=" + point.ID.ToString() + ", VObject=" + point.VObject.ToString() + "}";
             }
             return str;
         }
