@@ -995,7 +995,7 @@ namespace VectorEditor
                                                     Vector.SetCoordsP((int)(min.X + RelativelyCoords[j].X * width), (int)(min.Y + RelativelyCoords[j].Y * height), p); //Назначаем точки координаты
                                                     j++; //Счетчик
                                                 }
-                                                ((VTriangle)vobject).RecalculateSelectArea();
+                                                ((VPolygone)vobject).RecalculateSelectArea();
                                             }
                                             vobject.RecalculateCenter();
                                         }
