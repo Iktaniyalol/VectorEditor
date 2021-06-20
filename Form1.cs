@@ -1166,7 +1166,8 @@ namespace VectorEditor
                             {
                                 MouseCurrentPoint = new Point(e.X, e.Y);
                                 pictureBox1.Invalidate(); //Очищаем PictureBox
-                                Line line = new Line(thicknessBar.Value / 100f, thickness, new Point[] { MousePrevPoint, MouseCurrentPoint, new Point(((MousePrevPoint.X + MouseCurrentPoint.X) / 2), ((MousePrevPoint.Y + MouseCurrentPoint.Y) / 2)) }); //Создаем экземпляр класса Line, передаем точки
+                                Line line = new Line(thicknessBar.Value / 100f, thickness, new Point[] { MousePrevPoint, MouseCurrentPoint, new Point(((MousePrevPoint.X + MouseCurrentPoint.X) / 2), 
+                                    ((MousePrevPoint.Y + MouseCurrentPoint.Y) / 2)) }); //Создаем экземпляр класса Line, передаем точки
                                 Vector.AddNewFigure(line);
                                 SelectedFigures.Add(line); //Когда мы создаем векторный объект, он сразу становится "выбранным"
                                 pictureBox1.ContextMenuStrip = CopyDeleteMenu; //Назначаем меню копирования/удаления
@@ -1179,7 +1180,11 @@ namespace VectorEditor
                             {
                                 MouseCurrentPoint = new Point(e.X, e.Y);
                                 pictureBox1.Invalidate(); //Очищаем PictureBox
-                                VEllipse ellipse = new VEllipse(thicknessBar.Value / 100f, thickness, fill, new Point[] { new Point(Math.Min(MousePrevPoint.X, MouseCurrentPoint.X), Math.Min(MousePrevPoint.Y, MouseCurrentPoint.Y)), new Point(Math.Max(MousePrevPoint.X, MouseCurrentPoint.X), Math.Max(MousePrevPoint.Y, MouseCurrentPoint.Y)), new Point(Math.Min(MousePrevPoint.X, MouseCurrentPoint.X), Math.Max(MousePrevPoint.Y, MouseCurrentPoint.Y)), new Point(Math.Max(MousePrevPoint.X, MouseCurrentPoint.X), Math.Min(MousePrevPoint.Y, MouseCurrentPoint.Y)), new Point(((MousePrevPoint.X + MouseCurrentPoint.X) / 2), ((MousePrevPoint.Y + MouseCurrentPoint.Y) / 2)) }); //Создаем экземпляр класса VEllipse, передаем точки
+                                VEllipse ellipse = new VEllipse(thicknessBar.Value / 100f, thickness, fill, new Point[] { new Point(Math.Min(MousePrevPoint.X, MouseCurrentPoint.X), Math.Min(MousePrevPoint.Y, MouseCurrentPoint.Y)),
+                                    new Point(Math.Max(MousePrevPoint.X, MouseCurrentPoint.X), Math.Max(MousePrevPoint.Y, MouseCurrentPoint.Y)),
+                                    new Point(Math.Min(MousePrevPoint.X, MouseCurrentPoint.X), Math.Max(MousePrevPoint.Y, MouseCurrentPoint.Y)), 
+                                    new Point(Math.Max(MousePrevPoint.X, MouseCurrentPoint.X), Math.Min(MousePrevPoint.Y, MouseCurrentPoint.Y)),
+                                    new Point(((MousePrevPoint.X + MouseCurrentPoint.X) / 2), ((MousePrevPoint.Y + MouseCurrentPoint.Y) / 2)) }); //Создаем экземпляр класса VEllipse, передаем точки
                                 Vector.AddNewFigure(ellipse);
                                 SelectedFigures.Add(ellipse); //Когда мы создаем векторный объект, он сразу становится "выбранным"
                                 pictureBox1.ContextMenuStrip = CopyDeleteMenu; //Назначаем меню копирования/удаления
@@ -1192,7 +1197,11 @@ namespace VectorEditor
                             {
                                 MouseCurrentPoint = new Point(e.X, e.Y);
                                 pictureBox1.Invalidate(); //Очищаем PictureBox
-                                VRectangle rect = new VRectangle(thicknessBar.Value / 100f, thickness, fill, new Point[] { new Point(Math.Min(MousePrevPoint.X, MouseCurrentPoint.X), Math.Min(MousePrevPoint.Y, MouseCurrentPoint.Y)), new Point(Math.Max(MousePrevPoint.X, MouseCurrentPoint.X), Math.Max(MousePrevPoint.Y, MouseCurrentPoint.Y)), new Point(Math.Min(MousePrevPoint.X, MouseCurrentPoint.X), Math.Max(MousePrevPoint.Y, MouseCurrentPoint.Y)), new Point(Math.Max(MousePrevPoint.X, MouseCurrentPoint.X), Math.Min(MousePrevPoint.Y, MouseCurrentPoint.Y)), new Point(((MousePrevPoint.X + MouseCurrentPoint.X) / 2), ((MousePrevPoint.Y + MouseCurrentPoint.Y) / 2)) }); //Создаем экземпляр класса VRectangle, передаем точки
+                                VRectangle rect = new VRectangle(thicknessBar.Value / 100f, thickness, fill, new Point[] { new Point(Math.Min(MousePrevPoint.X, MouseCurrentPoint.X), Math.Min(MousePrevPoint.Y, MouseCurrentPoint.Y)), 
+                                    new Point(Math.Max(MousePrevPoint.X, MouseCurrentPoint.X), Math.Max(MousePrevPoint.Y, MouseCurrentPoint.Y)),
+                                    new Point(Math.Min(MousePrevPoint.X, MouseCurrentPoint.X), Math.Max(MousePrevPoint.Y, MouseCurrentPoint.Y)), 
+                                    new Point(Math.Max(MousePrevPoint.X, MouseCurrentPoint.X), Math.Min(MousePrevPoint.Y, MouseCurrentPoint.Y)),
+                                    new Point(((MousePrevPoint.X + MouseCurrentPoint.X) / 2), ((MousePrevPoint.Y + MouseCurrentPoint.Y) / 2)) }); //Создаем экземпляр класса VRectangle, передаем точки
                                 Vector.AddNewFigure(rect);
                                 SelectedFigures.Add(rect); //Когда мы создаем векторный объект, он сразу становится "выбранным"
                                 pictureBox1.ContextMenuStrip = CopyDeleteMenu; //Назначаем меню копирования/удаления
@@ -1282,12 +1291,14 @@ namespace VectorEditor
                         }
                     case SettingsAndModes.EditorMode.Circle: //Мод построения эллипса
                         {
-                            g.DrawEllipse(new Pen(SettingsAndModes.EditLineColor, thicknessBar.Value / 100f), Math.Min(MousePrevPoint.X, MouseCurrentPoint.X), Math.Min(MousePrevPoint.Y, MouseCurrentPoint.Y), Math.Abs(MousePrevPoint.X - MouseCurrentPoint.X), Math.Abs(MousePrevPoint.Y - MouseCurrentPoint.Y));
+                            g.DrawEllipse(new Pen(SettingsAndModes.EditLineColor, thicknessBar.Value / 100f), Math.Min(MousePrevPoint.X, MouseCurrentPoint.X), Math.Min(MousePrevPoint.Y, MouseCurrentPoint.Y), 
+                                Math.Abs(MousePrevPoint.X - MouseCurrentPoint.X), Math.Abs(MousePrevPoint.Y - MouseCurrentPoint.Y));
                             break;
                         }
                     case SettingsAndModes.EditorMode.Rectangle: //Мод построения прямоугольника
                         {
-                            g.DrawRectangle(new Pen(SettingsAndModes.EditLineColor, thicknessBar.Value / 100f), Math.Min(MousePrevPoint.X, MouseCurrentPoint.X), Math.Min(MousePrevPoint.Y, MouseCurrentPoint.Y), Math.Abs(MousePrevPoint.X - MouseCurrentPoint.X), Math.Abs(MousePrevPoint.Y - MouseCurrentPoint.Y));
+                            g.DrawRectangle(new Pen(SettingsAndModes.EditLineColor, thicknessBar.Value / 100f), Math.Min(MousePrevPoint.X, MouseCurrentPoint.X), Math.Min(MousePrevPoint.Y, MouseCurrentPoint.Y), 
+                                Math.Abs(MousePrevPoint.X - MouseCurrentPoint.X), Math.Abs(MousePrevPoint.Y - MouseCurrentPoint.Y));
                             break;
                         }
                     case SettingsAndModes.EditorMode.Cursor: //Мод курсора
@@ -1297,7 +1308,8 @@ namespace VectorEditor
                                 case SettingsAndModes.CursorMode.Select:
                                     {
                                         if (SelectPoint != null || SelectedAreaPoint != null) return; //Если мы выбирали точку, не рисуем
-                                        g.DrawRectangle(new Pen(SettingsAndModes.EditLineColor, 1), Math.Min(MousePrevPoint.X, MouseCurrentPoint.X), Math.Min(MousePrevPoint.Y, MouseCurrentPoint.Y), Math.Abs(MousePrevPoint.X - MouseCurrentPoint.X), Math.Abs(MousePrevPoint.Y - MouseCurrentPoint.Y));
+                                        g.DrawRectangle(new Pen(SettingsAndModes.EditLineColor, 1), Math.Min(MousePrevPoint.X, MouseCurrentPoint.X), Math.Min(MousePrevPoint.Y, MouseCurrentPoint.Y), 
+                                            Math.Abs(MousePrevPoint.X - MouseCurrentPoint.X), Math.Abs(MousePrevPoint.Y - MouseCurrentPoint.Y));
                                         break;
                                     }
                             }
@@ -1314,7 +1326,7 @@ namespace VectorEditor
                     g.FillEllipse(new SolidBrush(SettingsAndModes.EditPointColor), PolygonPoints[i].X - 2, PolygonPoints[i].Y - 2, 5, 5); //Строим точку диаметром 10
                 }
                 g.DrawLine(new Pen(SettingsAndModes.EditLineColor, thicknessBar.Value / 100f), PolygonPoints.Last(), MouseCurrentPoint); //Резиновая линия для демонстрации, как будет выглядеть линия, если поставить точку здесь
-                g.FillEllipse(new SolidBrush(SettingsAndModes.EditPointColor), PolygonPoints.Last().X - 2, PolygonPoints.Last().Y - 2, 5, 5); //Показываем последнюю точку, причем поверх "резиновой" линии для красоты                                                                                                                                           }
+                g.FillEllipse(new SolidBrush(SettingsAndModes.EditPointColor), PolygonPoints.Last().X - 2, PolygonPoints.Last().Y - 2, 5, 5); //Показываем последнюю точку, причем поверх "резиновой" линии для красоты 
             }
         }
 
