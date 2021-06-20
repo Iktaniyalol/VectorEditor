@@ -42,8 +42,6 @@ namespace VectorEditor
             this.thicknessBar = new System.Windows.Forms.TrackBar();
             this.colorButton2 = new System.Windows.Forms.Button();
             this.colorButton1 = new System.Windows.Forms.Button();
-            this.buttonRotate = new System.Windows.Forms.Button();
-            this.buttonMirror = new System.Windows.Forms.Button();
             this.buttonPolygon = new System.Windows.Forms.Button();
             this.buttonCircle = new System.Windows.Forms.Button();
             this.buttonRectangle = new System.Windows.Forms.Button();
@@ -139,8 +137,6 @@ namespace VectorEditor
             this.panel1.Controls.Add(this.thicknessBar);
             this.panel1.Controls.Add(this.colorButton2);
             this.panel1.Controls.Add(this.colorButton1);
-            this.panel1.Controls.Add(this.buttonRotate);
-            this.panel1.Controls.Add(this.buttonMirror);
             this.panel1.Controls.Add(this.buttonPolygon);
             this.panel1.Controls.Add(this.buttonCircle);
             this.panel1.Controls.Add(this.buttonRectangle);
@@ -157,7 +153,7 @@ namespace VectorEditor
             // labelThickness
             // 
             this.labelThickness.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelThickness.Location = new System.Drawing.Point(715, 3);
+            this.labelThickness.Location = new System.Drawing.Point(650, 3);
             this.labelThickness.Name = "labelThickness";
             this.labelThickness.Size = new System.Drawing.Size(184, 41);
             this.labelThickness.TabIndex = 17;
@@ -168,7 +164,7 @@ namespace VectorEditor
             // 
             this.thicknessBar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.thicknessBar.LargeChange = 500;
-            this.thicknessBar.Location = new System.Drawing.Point(456, 3);
+            this.thicknessBar.Location = new System.Drawing.Point(391, 3);
             this.thicknessBar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.thicknessBar.Maximum = 1000;
             this.thicknessBar.Minimum = 100;
@@ -184,7 +180,7 @@ namespace VectorEditor
             // colorButton2
             // 
             this.colorButton2.BackColor = System.Drawing.Color.Black;
-            this.colorButton2.Location = new System.Drawing.Point(416, 11);
+            this.colorButton2.Location = new System.Drawing.Point(351, 11);
             this.colorButton2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.colorButton2.Name = "colorButton2";
             this.colorButton2.Size = new System.Drawing.Size(35, 35);
@@ -197,7 +193,7 @@ namespace VectorEditor
             // 
             this.colorButton1.BackColor = System.Drawing.Color.White;
             this.colorButton1.Image = global::VectorEditor.Properties.Resources.resource__9_;
-            this.colorButton1.Location = new System.Drawing.Point(397, 5);
+            this.colorButton1.Location = new System.Drawing.Point(332, 5);
             this.colorButton1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.colorButton1.Name = "colorButton1";
             this.colorButton1.Size = new System.Drawing.Size(35, 35);
@@ -205,38 +201,6 @@ namespace VectorEditor
             this.colorButton1.UseVisualStyleBackColor = false;
             this.colorButton1.Click += new System.EventHandler(this.colorButton1_Click);
             this.colorButton1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.colorButton1_MouseDown);
-            // 
-            // buttonRotate
-            // 
-            this.buttonRotate.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.buttonRotate.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.buttonRotate.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonRotate.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonRotate.ForeColor = System.Drawing.Color.Brown;
-            this.buttonRotate.Image = global::VectorEditor.Properties.Resources.resource__5_;
-            this.buttonRotate.Location = new System.Drawing.Point(329, 3);
-            this.buttonRotate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.buttonRotate.Name = "buttonRotate";
-            this.buttonRotate.Size = new System.Drawing.Size(47, 42);
-            this.buttonRotate.TabIndex = 13;
-            this.buttonRotate.Tag = "Курсор";
-            this.buttonRotate.UseVisualStyleBackColor = false;
-            // 
-            // buttonMirror
-            // 
-            this.buttonMirror.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.buttonMirror.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.buttonMirror.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonMirror.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonMirror.ForeColor = System.Drawing.Color.Brown;
-            this.buttonMirror.Image = global::VectorEditor.Properties.Resources.resource__4_;
-            this.buttonMirror.Location = new System.Drawing.Point(276, 3);
-            this.buttonMirror.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.buttonMirror.Name = "buttonMirror";
-            this.buttonMirror.Size = new System.Drawing.Size(44, 42);
-            this.buttonMirror.TabIndex = 11;
-            this.buttonMirror.Tag = "Курсор";
-            this.buttonMirror.UseVisualStyleBackColor = false;
             // 
             // buttonPolygon
             // 
@@ -334,8 +298,6 @@ namespace VectorEditor
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button buttonCursor;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button buttonRotate;
-        private System.Windows.Forms.Button buttonMirror;
         private System.Windows.Forms.Button buttonPolygon;
         private System.Windows.Forms.Button buttonCircle;
         private System.Windows.Forms.Button buttonRectangle;

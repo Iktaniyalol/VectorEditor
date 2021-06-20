@@ -12,9 +12,13 @@ namespace VectorEditor.objects
         protected Color thicknessColor = Color.Black; //Цвет обводки/линии
         protected int[] PointsIDs; //Массив, в котором будут храниться все точки графического объекта
 
-        public abstract void Draw(Graphics g);
+        public abstract void Draw(Graphics g); //Функция отрисовки
 
-        public abstract void Select(Graphics g);
+        public abstract void Select(Graphics g); //Функция, которую нужно вызывать когда мы выбрали данный объект
+
+        public abstract void DrawSelectArea(Graphics g); //Функция рисования выделителя
+
+        public abstract void RecalculateCenter(); //Пересчет центра
 
         public void Remove() //Удаление векторного объекта
         {
@@ -24,8 +28,6 @@ namespace VectorEditor.objects
             }
             Vector.GetAllFigures().Remove(this); //Удаляем объект из списка
         }
-
-        public abstract void MoveTo(Point selected, Point newplace);
 
         public abstract GraphObject Clone(int dx, int dy); //Клонирование данного объекта, передается смещение по x и y
 

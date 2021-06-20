@@ -35,13 +35,39 @@ namespace VectorEditor.objects
         {
             MyPoint? begin = Vector.FindPbyID(PointsIDs[0]); //первая точка
             MyPoint? end = Vector.FindPbyID(PointsIDs[1]); //последняя точка
+            if (begin == null || end == null) return; //если точек нет, не рисуем
+            g.FillRectangle(new SolidBrush(SettingsAndModes.EditPointColor), begin.Value.X - 2, begin.Value.Y - 2, 5, 5); //Показываем первую точку
+            g.FillRectangle(new SolidBrush(SettingsAndModes.EditPointColor), end.Value.X - 2, end.Value.Y - 2, 5, 5); //Показываем вторую точку
+            g.DrawLine(new Pen(SettingsAndModes.EditLineColor, 1), begin.Value.ConvertToPoint(), end.Value.ConvertToPoint()); //рисуем выделение самой линии
+            DrawCenter(g); //Рисуем центр
+        }
+
+        public override void DrawSelectArea(Graphics g) //Функция рисования выделителя
+        {
+            MyPoint? begin = Vector.FindPbyID(PointsIDs[0]); //первая точка
+            MyPoint? end = Vector.FindPbyID(PointsIDs[1]); //последняя точка
+            g.FillRectangle(new SolidBrush(Color.White), begin.Value.X - 2, begin.Value.Y - 2, 5, 5);
+            g.DrawRectangle(new Pen(SettingsAndModes.EditLineColor, 1), begin.Value.X - 2, begin.Value.Y - 2, 5, 5); //Показываем первую точку
+            g.FillRectangle(new SolidBrush(Color.White), end.Value.X - 2, end.Value.Y - 2, 5, 5);
+            g.DrawRectangle(new Pen(SettingsAndModes.EditLineColor, 1), end.Value.X - 2, end.Value.Y - 2, 5, 5); //Показываем вторую точку
+        }
+
+        private void DrawCenter(Graphics g) //Прорисовываем центр
+        {
             MyPoint? center = Vector.FindPbyID(PointsIDs[2]); //центр линии
-            if (begin == null || end == null || center == null) return; //если точек нет, не рисуем
-            g.DrawLine(new Pen(SettingsAndModes.EditLineColor, 1), begin.Value.ConvertToPoint(), end.Value.ConvertToPoint()); //рисуем
-            g.FillEllipse(new SolidBrush(SettingsAndModes.EditPointColor), begin.Value.X - 2, begin.Value.Y - 2, 5, 5); //Показываем первую точку
-            g.FillEllipse(new SolidBrush(SettingsAndModes.EditPointColor), end.Value.X - 2, end.Value.Y - 2, 5, 5); //Показываем первую точку
-            g.FillEllipse(new SolidBrush(SettingsAndModes.CenterPointColor), ((begin.Value.X + end.Value.X) / 2) - 2, ((begin.Value.Y + end.Value.Y) / 2) - 2, 5, 5); //Показываем центр линии
-            g.DrawEllipse(new Pen(SettingsAndModes.EditLineColor, 1), ((begin.Value.X + end.Value.X) / 2) - 2, ((begin.Value.Y + end.Value.Y) / 2) - 2, 5, 5);
+            if (center == null) return; //если нет точки, не рисуем
+            //Показываем центр линии
+            g.FillRectangle(new SolidBrush(SettingsAndModes.CenterPointColor), center.Value.X - 2, center.Value.Y - 2, 5, 5);
+        }
+
+        public override void RecalculateCenter() //Пересчет центра
+        {
+            MyPoint? begin = Vector.FindPbyID(PointsIDs[0]); //первая точка
+            MyPoint? end = Vector.FindPbyID(PointsIDs[1]); //последняя точка
+            MyPoint? center = Vector.FindPbyID(PointsIDs[2]); //центр линии
+            if (begin == null || end == null || center == null) return; //если нет точек, не пересчитываем
+            //Теперь нужно перезаписать центру координаты
+            Vector.SetCoordsP((begin.Value.X + end.Value.X) / 2, (begin.Value.Y + end.Value.Y) / 2, center);
         }
 
         public override GraphObject Clone(int dx, int dy) //Клонирование данного объекта, передается смещение по x и y
@@ -55,11 +81,6 @@ namespace VectorEditor.objects
                 points[i] = p;
             }
             return new Line(thickness, thicknessColor, points); //Создаем объект и возвращаем
-        }
-
-        public override void MoveTo(Point selected, Point newplace) //Перемещение линии по выбранной точке
-        {
-
         }
     }
 }

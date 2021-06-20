@@ -16,5 +16,7 @@ namespace VectorEditor.objects
                 return pointCount;
             }
         }
+
+        public abstract void RecalculateSelectArea(); //Пересчет точек выделения
     }
 }
